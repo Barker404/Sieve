@@ -1,0 +1,2 @@
+def sieve(max):
+    pass
