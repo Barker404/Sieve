@@ -12,26 +12,26 @@ def sieve(max):
     
     # A number larger than the square root of the max will not be a factor of 
     # any number less than or equal to the max
-    limit = math.sqrt(max)
+    limit = int(math.floor(math.sqrt(max)))
+    print limit
     # 2 is first prime number
-    currentPrime = 2
-    # Stop when the lsat possible factor is passed
-    while currentPrime <= limit:
-        # Any number below the square would already be checked if not prime
-        multiple = currentPrime * currentPrime
-        # Do sieving for this prime
-        # "Cross out" any multiple of it
-        while multiple <= max:
-            primes[multiple] = False
-            multiple += currentPrime
-        # Get the next prime to sieve with
-        # The next number not "crossed out"
-        currentPrime += 1
-        while (primes[currentPrime] == False and 
-            currentPrime <= limit):
-            currentPrime += 1
+    # Stop when the last possible factor is passed
+    for i in xrange(2, limit):
+        isPrime = primes[i]
+        if isPrime:
+            # Any number below the square would already be checked if not prime
+            multiple = i * i
+            # Do sieving for this prime
+            # "Cross out" any multiple of it
+            while multiple <= max:
+                primes[multiple] = False
+                multiple += i
 
     # Yield the actual values of the primes found
     for i, e in enumerate(primes):
         if e:
             yield i   
+
+p = []
+for i in sieve(10000000):
+    p.append[i]
